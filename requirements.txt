@@ -1,0 +1,8 @@
+google-genai
+python-dotenv
+markdown2
+PyYAML
+pdfkit
+jinja2
+markdown
+pypandoc

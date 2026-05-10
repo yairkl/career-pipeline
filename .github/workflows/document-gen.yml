@@ -1,0 +1,84 @@
+name: Generate PDF from CV
+
+on:
+  push:
+    branches: [master, 'tailor/**']
+  pull_request:
+  workflow_call:
+    inputs:
+      branch_ref: # New input to specify the branch
+        type: string
+        required: true
+      issue_number:
+        type: string
+        required: false
+      pr_number:
+        type: string
+        required: false
+
+jobs:
+  generate_pdf:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to create releases
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch_ref }} # Force checkout of the new branch
+      - name: Generate PDF via Pandoc
+        uses: docker://pandoc/latex:latest
+        with:
+          args: >-
+            --standalone
+            --pdf-engine=xelatex
+            --css=assets/style.css
+            --variable=geometry:margin=0.3in
+            --variable=fontsize=8pt
+            --variable=linestretch=0.8
+            -o CV.pdf
+            CV.md
+
+      # NEW: Create a Release and upload the PDF
+      # This only runs for 'tailor/' branches or master pushes
+      - name: Release PDF
+        if: startsWith(github.ref, 'refs/heads/tailor/') || github.ref == 'refs/heads/master'
+        uses: softprops/action-gh-release@v2
+        with:
+          # Use the branch name or issue number as the tag
+          tag_name: ${{ inputs.branch_ref }}-pdf
+          name: "CV Build: ${{ inputs.branch_ref }}"
+          files: CV.pdf
+          draft: false
+          prerelease: true # Keeps it marked as a 'Pre-release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment on PR and Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const releaseUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/${{ inputs.branch_ref }}-pdf`;
+            const body = `✅ **PDF Generation Complete!**\n\nYou can download the tailored CV directly from the [Release Assets](${releaseUrl}).`;
+            
+            const prNumber = "${{ inputs.pr_number }}" || context.payload.pull_request?.number;
+            if (prNumber) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: parseInt(prNumber),
+                body: body
+              });
+            }
+
+            const issueNumber = "${{ inputs.issue_number }}";
+            if (issueNumber) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: parseInt(issueNumber),
+                body: `📄 Your tailored CV is ready!\n\n[Download PDF Release Asset](${releaseUrl})`
+              });
+            }

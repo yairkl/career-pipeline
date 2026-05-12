@@ -1,0 +1,54 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Production
+dist
+dist-ssr
+build
+
+# Misc
+.DS_Store
+*.pem
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Firebase
+.firebase/
+firebase-debug.log*
+ui-debug.log*
+firestore-debug.log*
+pubsub-debug.log*
+functions-debug.log*
+hosting-debug.log*
+database-debug.log*
+storage-debug.log*
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.local
+storage_cors.json
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+seed.mjs

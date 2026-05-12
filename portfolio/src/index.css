@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+  
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-surface-variant: var(--surface-variant);
+  --color-on-surface-variant: var(--on-surface-variant);
+  
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  
+  --color-background: var(--background);
+  --color-on-background: var(--on-background);
+  
+  --font-display: "Outfit", sans-serif;
+  --font-headline: "Outfit", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+  
+  --radius-default: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
+:root {
+  --background: #fbfbfb;
+  --on-background: #121212;
+  
+  --surface: #ffffff;
+  --on-surface: #121212;
+  --surface-variant: #f0f0f0;
+  --on-surface-variant: #404040;
+  
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f8f8f8;
+  --surface-container: #f3f3f3;
+  --surface-container-high: #eeeeee;
+  --surface-container-highest: #e5e5e5;
+  
+  --primary: #121212;
+  --on-primary: #ffffff;
+  --primary-container: #e5e5e5;
+  --on-primary-container: #121212;
+  
+  --secondary: #737373;
+  --on-secondary: #ffffff;
+  --secondary-container: #f5f5f5;
+  --on-secondary-container: #121212;
+  
+  --outline: #d4d4d4;
+  --outline-variant: #e5e5e5;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --on-background: #fbfbfb;
+  
+  --surface: #121212;
+  --on-surface: #fbfbfb;
+  --surface-variant: #1e1e1e;
+  --on-surface-variant: #a3a3a3;
+  
+  --surface-container-lowest: #050505;
+  --surface-container-low: #0f0f0f;
+  --surface-container: #171717;
+  --surface-container-high: #1f1f1f;
+  --surface-container-highest: #262626;
+  
+  --primary: #fbfbfb;
+  --on-primary: #121212;
+  --primary-container: #262626;
+  --on-primary-container: #fbfbfb;
+  
+  --secondary: #a3a3a3;
+  --on-secondary: #121212;
+  --secondary-container: #1e1e1e;
+  --on-secondary-container: #fbfbfb;
+  
+  --outline: #262626;
+  --outline-variant: #171717;
+}
+
+/* Theme Ocean (Blue) */
+.theme-ocean {
+  --primary: #2563eb;
+  --on-primary: #ffffff;
+  --primary-container: #dbeafe;
+  --on-primary-container: #1e3a8a;
+}
+.dark.theme-ocean {
+  --primary: #60a5fa;
+  --on-primary: #eff6ff;
+  --primary-container: #1e3a8a;
+  --on-primary-container: #bfdbfe;
+}
+
+/* Theme Emerald (Green) */
+.theme-emerald {
+  --primary: #059669;
+  --on-primary: #ffffff;
+  --primary-container: #d1fae5;
+  --on-primary-container: #064e3b;
+}
+.dark.theme-emerald {
+  --primary: #34d399;
+  --on-primary: #ecfdf5;
+  --primary-container: #064e3b;
+  --on-primary-container: #a7f3d0;
+}
+
+/* Theme Rose (Pink) */
+.theme-rose {
+  --primary: #e11d48;
+  --on-primary: #ffffff;
+  --primary-container: #ffe4e6;
+  --on-primary-container: #881337;
+}
+.dark.theme-rose {
+  --primary: #fb7185;
+  --on-primary: #fff1f2;
+  --primary-container: #881337;
+  --on-primary-container: #fecdd3;
+}
+
+/* Theme Midnight (Purple) */
+.theme-midnight {
+  --primary: #7c3aed;
+  --on-primary: #ffffff;
+  --primary-container: #ede9fe;
+  --on-primary-container: #4c1d95;
+}
+.dark.theme-midnight {
+  --primary: #a78bfa;
+  --on-primary: #f5f3ff;
+  --primary-container: #4c1d95;
+  --on-primary-container: #ddd6fe;
+}
+
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* Accounts for fixed header */
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-body antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .editorial-border {
+    @apply border-t border-outline-variant pt-10;
+  }
+  
+  .glass {
+    @apply bg-surface/80 backdrop-blur-xl border border-outline-variant/30;
+  }
+  
+  .shadow-soft {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-outline/30 rounded-full border-2 border-transparent border-solid bg-clip-padding;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-outline/60;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-primary/10 rounded-full border-2 border-transparent border-solid bg-clip-padding;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/30;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-outline/20 rounded-full;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-primary/10;
+}
+
+/* Material Symbols configuration */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}

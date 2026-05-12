@@ -1,0 +1,15 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isOwner() {
+      return request.auth != null &&
+             firestore.exists(/databases/(default)/documents/config/system) &&
+             firestore.get(/databases/(default)/documents/config/system).data.ownerUid == request.auth.uid;
+    }
+
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if isOwner();
+    }
+  }
+}

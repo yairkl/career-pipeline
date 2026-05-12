@@ -2,7 +2,7 @@
 
 🚀 **Automate, tailor, and deploy your CV with GitHub Actions and AI.**
 
-CareerPipeline is an open-source template that treats your resume as **"Content as Code"**, using GitHub Actions as the CI/CD engine and LLMs (Google Gemini) as the intelligent transformation layer.
+CareerPipeline is an open-source template that treats your resume as **"Content as Code"**, using GitHub Actions as the CI/CD engine and LLMs (Google Gemini) as the intelligent transformation layer. It now includes a **Dynamic Interactive Portfolio** to showcase your work beautifully and manage it via an admin dashboard.
 
 ---
 
@@ -62,8 +62,14 @@ PDF Generated & Attached
        ↓
 User Reviews & Iterates
        ↓
-Merge to Master → Deploy to GitHub Pages
+Merge to Master → Deploy to GitHub Pages & Portfolio
 ```
+
+### Portfolio Architecture
+The portfolio is a standalone React application that serves as your public-facing brand.
+- **Dynamic Content**: Powered by Firebase (Firestore + Storage).
+- **Admin Dashboard**: Securely manage projects, skills, and bio via `/login`.
+- **Self-Service**: Reusable by anyone by simply changing Firebase environment variables.
 
 ---
 
@@ -159,6 +165,39 @@ Edit the `create_system_prompt()` method in [.github/scripts/tailor_engine.py](.
 
 ### 4. Enable GitHub Pages
 Go to **Settings > Pages** and set the source to `gh-pages` branch.
+
+---
+
+## Interactive Portfolio Setup (New!)
+
+The `portfolio/` directory contains a high-end React template that connects to Firebase for dynamic management.
+
+### 1. Firebase Setup
+1. Create a project at [Firebase Console](https://console.firebase.google.com/).
+2. Enable **Firestore**, **Authentication** (Google), and **Storage**.
+3. In Project Settings, add a **Web App** and copy the configuration.
+
+### 2. Configure Portfolio
+1. Create `portfolio/.env` (copy from `portfolio/.env.example`).
+2. Fill in your Firebase config keys.
+
+### 3. Deploy Infrastructure
+```bash
+cd portfolio
+npm install
+firebase login
+firebase use --add [your-project-id]
+firebase deploy --only firestore,storage
+```
+
+### 4. Fix CORS (One-time)
+To allow local uploads, run:
+```bash
+gsutil cors set storage_cors.json gs://[your-bucket-name]
+```
+
+### 5. Launch & Manage
+Run `npm run dev` and navigate to `/login` to start building your professional showcase!
 
 ---
 

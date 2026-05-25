@@ -40,6 +40,7 @@ env/
 CV_tailored.md
 CV.pdf
 CV_tailored.pdf
+pandoc_vars.env
 
 # GitHub Actions
 .github/workflows/debug/

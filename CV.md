@@ -4,15 +4,11 @@
 [Your Phone Number]  
 [Your Email Address]  
 [LinkedIn Profile URL]  
-[GitHub Profile URL]  
-
----
+[GitHub Profile URL]
 
 ## Summary
 
 Dynamic and results-oriented professional with [X years] of experience in [Your Industry/Field]. Proven track record of [Key Achievements or Skills]. Adept at [Specific Skills or Technologies]. Seeking to leverage expertise in [Target Role/Industry] to contribute to [Company Name or Project].
-
----
 
 ## Experience
 
@@ -32,15 +28,11 @@ Dynamic and results-oriented professional with [X years] of experience in [Your 
 - [Responsibility/Task 2]
 - [Responsibility/Task 3]
 
----
-
 ## Education
 
 ### [Degree] in [Field of Study]  
 [University Name], [Location]  
 [Month, Year] – [Month, Year]
-
----
 
 ## Skills
 
@@ -50,14 +42,10 @@ Dynamic and results-oriented professional with [X years] of experience in [Your 
 - [Skill 4]
 - [Skill 5]
 
----
-
 ## Certifications
 
 - [Certification Name], [Issuing Organization] - [Year]
 - [Certification Name], [Issuing Organization] - [Year]
-
----
 
 ## Projects
 
@@ -69,8 +57,6 @@ Dynamic and results-oriented professional with [X years] of experience in [Your 
 
 - [Brief description of the project, technologies used, and your role]
 
----
-
 ## Volunteer Experience
 
 ### [Role]  
@@ -79,8 +65,6 @@ Dynamic and results-oriented professional with [X years] of experience in [Your 
 
 - [Responsibility/Task 1]
 - [Responsibility/Task 2]
-
----
 
 ## References
 

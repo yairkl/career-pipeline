@@ -44,7 +44,9 @@ IMPORTANT RULES:
 - DO preserve the exact structure (headers, bullet points, etc.)
 - DO apply changes surgically - only modify what's requested
 - DO NOT invent new information
-- DO NOT hallucinate skills or achievements"""
+- DO NOT hallucinate skills or achievements
+- DO maintain single-page brevity: do not expand content beyond what's needed for the feedback, keeping layout constraints in mind.
+- DO NOT include horizontal rules (like '---') or page break separator lines between sections in the output markdown."""
     
     def apply_feedback(self, feedback, job_description):
         """

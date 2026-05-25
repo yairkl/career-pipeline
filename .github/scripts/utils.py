@@ -78,7 +78,7 @@ def extract_keywords_from_jd(job_description: str) -> List[str]:
 
 def generate_pdf_from_markdown(markdown_path: str, output_pdf_path: str) -> None:
     """
-    Generate a PDF from a markdown file using pandoc.
+    Generate a PDF from a markdown file using pandoc, optimizing layout dynamically.
     Assumes pandoc is installed on the system.
     
     Args:
@@ -88,17 +88,45 @@ def generate_pdf_from_markdown(markdown_path: str, output_pdf_path: str) -> None
     import subprocess
     from pathlib import Path
     
+    # Try to import layout optimizer to get adaptive styling
+    try:
+        from layout_optimizer import analyze_cv, determine_tier, TIERS, write_latex_vars
+        
+        with open(markdown_path, 'r', encoding='utf-8') as f:
+            cv_content = f.read()
+        _, _, _, score = analyze_cv(cv_content)
+        tier_name = determine_tier(score)
+        tier_data = TIERS[tier_name].copy()
+        tier_data['name'] = tier_name
+        
+        # Write layout_vars.tex locally
+        layout_vars_path = Path('assets/layout_vars.tex')
+        if not layout_vars_path.parent.exists():
+            layout_vars_path.parent.mkdir(parents=True, exist_ok=True)
+        write_latex_vars(tier_data, str(layout_vars_path))
+        
+        fontsize = tier_data['fontsize']
+        margin = tier_data['margin']
+        linestretch = tier_data['linestretch']
+    except Exception as e:
+        # Fallback to standard if layout_optimizer is not importable
+        fontsize = '10pt'
+        margin = '0.5in'
+        linestretch = '1.15'
+        
     cmd = [
         'pandoc',
         markdown_path,
         '-o',
         output_pdf_path,
         '--pdf-engine=xelatex',
-        '-V', 'fontsize=11pt',
-        '-V', 'mainfont=Calibri',
-        '-V', 'geometry:margin=0.5in'
+        '-V', f'fontsize={fontsize}',
+        '-V', f'geometry:margin={margin}',
+        '-V', f'linestretch={linestretch}'
     ]
     
+    if Path('assets/layout_vars.tex').exists():
+        cmd.extend(['-H', 'assets/layout_vars.tex'])
     if Path('assets/header.tex').exists():
         cmd.extend(['-H', 'assets/header.tex'])
         
@@ -108,6 +136,7 @@ def generate_pdf_from_markdown(markdown_path: str, output_pdf_path: str) -> None
         raise Exception(f"Error generating PDF: {str(e)}")
     except FileNotFoundError:
         raise Exception("pandoc is not installed. Please install it to generate PDFs.")
+
 
 def format_cv_with_css(markdown_content: str, css_path: str = 'assets/style.css') -> str:
     """

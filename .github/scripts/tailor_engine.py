@@ -38,9 +38,11 @@ class TailorEngine:
 4. Matching the target role's terminology and requirements
 5. Preserving the original structure and markdown formatting
 6. Only modifying content that is relevant to the JD
+7. Keep the output concise and single-page-friendly: limit experience to 3-4 bullet points per role, use brief impactful statements, and omit low-relevance details.
 
 Do NOT invent skills, projects, or achievements not in the original CV.
-DO emphasize existing experiences that match the target role."""
+DO emphasize existing experiences that match the target role.
+Do NOT include horizontal rules (like '---') or page break separator lines between sections in the output markdown."""
     
     def transform_cv(self, job_description):
         """

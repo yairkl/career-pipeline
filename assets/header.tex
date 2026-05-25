@@ -37,7 +37,7 @@
 
 % Document wide settings
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.6em}
+\setlength{\parskip}{\cvParSkip}
 
 % Format level 1 headers (centered name/title)
 \let\originalsection\section
@@ -45,37 +45,47 @@
   \begin{center}
     {\Huge\bfseries\color{primary}#1}
   \end{center}
-  \vspace{-0.6em}
+  \vspace{\cvTitlePostSkip}
 }
 
 % Format level 2 headers (sections like Experience, Education) with a bottom line
 \let\originalsubsection\subsection
 \renewcommand{\subsection}[1]{%
-  \vspace{0.8em}%
+  \vspace{\cvSectionPreSkip}%
   \originalsubsection*{%
     \color{primary}#1%
-    \newline%
-    \vspace{-0.95em}%
-    {\color{primary}\rule{\linewidth}{1pt}}%
   }%
-  \vspace{0.2em}%
+  \vspace{\cvSectionRuleSkip}%
+  {\color{accent}\rule{\linewidth}{0.5pt}}%
+  \vspace{\cvSectionPostSkip}%
 }
 
 % Format level 3 headers (Job Titles, Degrees)
 \let\originalsubsubsection\subsubsection
 \renewcommand{\subsubsection}[1]{%
-  \vspace{0.4em}%
+  \vspace{\cvJobPreSkip}%
   \originalsubsubsection*{%
     \color{secondary}\bfseries#1%
   }%
-  \vspace{-0.2em}%
+  \vspace{\cvJobPostSkip}%
 }
 
 % Customize lists to look clean and modern
 \def\tightlist{%
-  \setlength{\itemsep}{2pt}%
+  \setlength{\itemsep}{\cvItemSep}%
   \setlength{\parskip}{0pt}%
-  \setlength{\parsep}{1pt}%
+  \setlength{\parsep}{\cvParSep}%
+}
+
+% Apply top spacing constraint to bullet lists natively
+\let\olditemize\itemize
+\let\endolditemize\enditemize
+\renewenvironment{itemize}{%
+  \olditemize
+  \setlength{\topsep}{\cvTopSep}%
+  \setlength{\partopsep}{0pt}%
+}{%
+  \endolditemize
 }
 
 % Friendly, smaller bullets
@@ -88,3 +98,4 @@
     filecolor=accent,      
     urlcolor=accent,
 }
+

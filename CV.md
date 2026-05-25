@@ -1,5 +1,3 @@
-# Career Pipeline Master Resume
-
 # [Your Name]
 [Your Address]  
 [City, State, Zip]  
@@ -21,6 +19,7 @@ Dynamic and results-oriented professional with [X years] of experience in [Your 
 ### [Job Title]  
 [Company Name], [Location]  
 [Month, Year] – Present  
+
 - [Responsibility/Task 1]
 - [Responsibility/Task 2]
 - [Responsibility/Task 3]
@@ -28,6 +27,7 @@ Dynamic and results-oriented professional with [X years] of experience in [Your 
 ### [Job Title]  
 [Company Name], [Location]  
 [Month, Year] – [Month, Year]  
+
 - [Responsibility/Task 1]
 - [Responsibility/Task 2]
 - [Responsibility/Task 3]
@@ -62,9 +62,11 @@ Dynamic and results-oriented professional with [X years] of experience in [Your 
 ## Projects
 
 ### [Project Title]
+
 - [Brief description of the project, technologies used, and your role]
 
 ### [Project Title]
+
 - [Brief description of the project, technologies used, and your role]
 
 ---
@@ -74,6 +76,7 @@ Dynamic and results-oriented professional with [X years] of experience in [Your 
 ### [Role]  
 [Organization Name], [Location]  
 [Month, Year] – [Month, Year]  
+
 - [Responsibility/Task 1]
 - [Responsibility/Task 2]
 

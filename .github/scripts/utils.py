@@ -86,18 +86,24 @@ def generate_pdf_from_markdown(markdown_path: str, output_pdf_path: str) -> None
         output_pdf_path: Path where the PDF should be saved
     """
     import subprocess
+    from pathlib import Path
     
+    cmd = [
+        'pandoc',
+        markdown_path,
+        '-o',
+        output_pdf_path,
+        '--pdf-engine=xelatex',
+        '-V', 'fontsize=11pt',
+        '-V', 'mainfont=Calibri',
+        '-V', 'geometry:margin=0.5in'
+    ]
+    
+    if Path('assets/header.tex').exists():
+        cmd.extend(['-H', 'assets/header.tex'])
+        
     try:
-        subprocess.run([
-            'pandoc',
-            markdown_path,
-            '-o',
-            output_pdf_path,
-            '--pdf-engine=xelatex',
-            '-V', 'fontsize=11pt',
-            '-V', 'mainfont=Calibri',
-            '-V', 'geometry:margin=0.5in'
-        ], check=True)
+        subprocess.run(cmd, check=True)
     except subprocess.CalledProcessError as e:
         raise Exception(f"Error generating PDF: {str(e)}")
     except FileNotFoundError:

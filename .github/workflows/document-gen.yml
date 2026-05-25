@@ -34,10 +34,10 @@ jobs:
           args: >-
             --standalone
             --pdf-engine=xelatex
-            --css=assets/style.css
-            --variable=geometry:margin=0.3in
-            --variable=fontsize=8pt
-            --variable=linestretch=0.8
+            -H assets/header.tex
+            --variable=geometry:margin=0.5in
+            --variable=fontsize=10pt
+            --variable=linestretch=1.15
             -o CV.pdf
             CV.md
 

@@ -1,0 +1,90 @@
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% Engine-specific font configuration
+\newif\ifxelatexluatex
+\ifx\numexpr\undefined
+  \xelatexluatexfalse
+\else
+  \ifx\directlua\undefined
+    \ifx\XeTeXversion\undefined
+      \xelatexluatexfalse
+    \else
+      \xelatexluatextrue
+    \fi
+  \else
+    \xelatexluatextrue
+  \fi
+\fi
+
+\ifxelatexluatex
+  % For XeLaTeX (GitHub Actions/Docker) and LuaLaTeX (local fallback)
+  \setmainfont{lmsans10-regular.otf}[
+    BoldFont = lmsans10-bold.otf,
+    ItalicFont = lmsans10-oblique.otf,
+    BoldItalicFont = lmsans10-boldoblique.otf
+  ]
+\else
+  % For pdfLaTeX (local fallback)
+  \usepackage[scaled=0.92]{helvet}
+  \renewcommand{\familydefault}{\sfdefault}
+\fi
+
+% Define a modern, friendly color palette
+\definecolor{primary}{HTML}{1A365D}    % Deep navy blue
+\definecolor{secondary}{HTML}{4A5568}  % Slate gray
+\definecolor{accent}{HTML}{2B6CB0}     % Medium blue for links
+
+% Document wide settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% Format level 1 headers (centered name/title)
+\let\originalsection\section
+\renewcommand{\section}[1]{%
+  \begin{center}
+    {\Huge\bfseries\color{primary}#1}
+  \end{center}
+  \vspace{-0.6em}
+}
+
+% Format level 2 headers (sections like Experience, Education) with a bottom line
+\let\originalsubsection\subsection
+\renewcommand{\subsection}[1]{%
+  \vspace{0.8em}%
+  \originalsubsection*{%
+    \color{primary}#1%
+    \newline%
+    \vspace{-0.95em}%
+    {\color{primary}\rule{\linewidth}{1pt}}%
+  }%
+  \vspace{0.2em}%
+}
+
+% Format level 3 headers (Job Titles, Degrees)
+\let\originalsubsubsection\subsubsection
+\renewcommand{\subsubsection}[1]{%
+  \vspace{0.4em}%
+  \originalsubsubsection*{%
+    \color{secondary}\bfseries#1%
+  }%
+  \vspace{-0.2em}%
+}
+
+% Customize lists to look clean and modern
+\def\tightlist{%
+  \setlength{\itemsep}{2pt}%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parsep}{1pt}%
+}
+
+% Friendly, smaller bullets
+\renewcommand{\labelitemi}{\color{accent}\raisebox{0.15ex}{\tiny$\bullet$}}
+
+% Link styling
+\hypersetup{
+    colorlinks=true,
+    linkcolor=accent,
+    filecolor=accent,      
+    urlcolor=accent,
+}
